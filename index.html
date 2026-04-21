@@ -602,6 +602,79 @@
             flex: 1;
         }
 
+        .checklist-edit-input {
+            flex: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .checklist-edit-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .checklist-item:hover .checklist-edit-btn {
+            opacity: 1;
+        }
+
+        .checklist-edit-btn:hover {
+            color: var(--accent);
+        }
+
+        .checklist-item.editing .checklist-checkbox,
+        .checklist-item.editing .checklist-text {
+            display: none;
+        }
+
+        .checklist-item.editing .checklist-edit-input,
+        .checklist-item.editing .checklist-edit-btn {
+            display: block;
+        }
+
+        .checklist-owner {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .checklist-owner-input {
+            width: 100px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.2rem 0.4rem;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .checklist-owner-input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* List Item Actions */
+        .list-item-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .list-item-actions .btn-icon {
+            padding: 0.5rem;
+        }
+
         /* Tags Input */
         .tags-input-container {
             background: var(--bg-secondary);
@@ -1717,48 +1790,113 @@
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">确认场地布置</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="确认场地布置">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">邀请嘉宾名单确认</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="邀请嘉宾名单确认">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">活动流程彩排</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="活动流程彩排">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">设备调试（机器人、展示项目）</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="设备调试（机器人、展示项目）">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">餐饮预订确认</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="餐饮预订确认">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">物料印刷完成</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="物料印刷完成">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">奖品准备</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="奖品准备">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">社交媒体预告发布</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="社交媒体预告发布">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">人员分工确认</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="人员分工确认">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                     <div class="checklist-item" onclick="toggleCheck(this)">
                         <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
                         <span class="checklist-text">应急预案准备</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="应急预案准备">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                        <span class="checklist-text">网站设计完成</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="网站设计完成">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                        <span class="checklist-text">课程发布</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="课程发布">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                        <span class="checklist-text">夏令营发布 & 完赛队召集发布</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="夏令营发布 & 完赛队召集发布">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                        <span class="checklist-text">微信群建立</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="微信群建立">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                        <span class="checklist-text">线上宣讲会预热</span>
+                        <input type="text" class="checklist-edit-input" style="display:none" value="线上宣讲会预热">
+                        <button class="checklist-edit-btn" style="display:none" onclick="event.stopPropagation(); editChecklistItem(this)"><i class="fas fa-pen"></i></button>
+                        <input type="text" class="checklist-owner-input" placeholder="负责人" data-owner oninput="saveChecklistOwner(this)">
                     </div>
                 </div>
                 <div class="progress-bar" style="margin-top: 1.5rem;">
                     <div class="progress-fill" id="checklistProgress" style="width: 0%"></div>
                 </div>
-                <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary);" id="checklistStatus">0/10 完成</p>
+                <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary);" id="checklistStatus">0/15 完成</p>
             </div>
         </div>
     </main>
@@ -2700,7 +2838,8 @@
             videos: [],
             banners: [],
             socialPosts: [],
-            checklist: Array(10).fill(false),
+            checklist: Array(15).fill(false),
+            checklistOwners: Array(15).fill(''),
             promoProjects: [],
             ageGroups: [],
             social: {
@@ -2759,12 +2898,79 @@
 
         // Toggle Checklist
         function toggleCheck(item) {
+            if (item.classList.contains('editing')) return;
             item.classList.toggle('checked');
             const index = Array.from(document.querySelectorAll('.checklist-item')).indexOf(item);
             appData.checklist[index] = item.classList.contains('checked');
             updateChecklistProgress();
             saveData();
         }
+
+        // Edit Checklist Item
+        function editChecklistItem(btn) {
+            const item = btn.closest('.checklist-item');
+            if (item.classList.contains('editing')) {
+                // Save
+                const input = item.querySelector('.checklist-edit-input');
+                const text = item.querySelector('.checklist-text');
+                const newText = input.value.trim();
+                if (newText) {
+                    text.textContent = newText;
+                    input.value = newText;
+                    // Save to data
+                    const index = Array.from(document.querySelectorAll('.checklist-item')).indexOf(item);
+                    if (!appData.checklistItems) {
+                        appData.checklistItems = [];
+                        document.querySelectorAll('.checklist-item').forEach((el, i) => {
+                            appData.checklistItems.push(el.querySelector('.checklist-text').textContent);
+                        });
+                    }
+                    appData.checklistItems[index] = newText;
+                    saveData();
+                }
+                item.classList.remove('editing');
+                item.querySelector('.checklist-checkbox').style.display = '';
+                item.querySelector('.checklist-text').style.display = '';
+                item.querySelector('.checklist-edit-input').style.display = 'none';
+                item.querySelector('.checklist-edit-btn').style.display = 'none';
+                item.querySelector('.checklist-edit-btn').innerHTML = '<i class="fas fa-pen"></i>';
+            } else {
+                // Start editing
+                const input = item.querySelector('.checklist-edit-input');
+                const text = item.querySelector('.checklist-text');
+                input.value = text.textContent;
+                item.classList.add('editing');
+                item.querySelector('.checklist-checkbox').style.display = 'none';
+                item.querySelector('.checklist-text').style.display = 'none';
+                item.querySelector('.checklist-edit-input').style.display = '';
+                item.querySelector('.checklist-edit-btn').style.display = '';
+                item.querySelector('.checklist-edit-btn').innerHTML = '<i class="fas fa-check"></i>';
+                input.focus();
+                input.select();
+            }
+        }
+
+        // Enter key to save edit
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const editingItem = document.querySelector('.checklist-item.editing');
+                if (editingItem) {
+                    editChecklistItem(editingItem.querySelector('.checklist-edit-btn'));
+                }
+            }
+            if (e.key === 'Escape') {
+                const editingItem = document.querySelector('.checklist-item.editing');
+                if (editingItem) {
+                    const btn = editingItem.querySelector('.checklist-edit-btn');
+                    editingItem.classList.remove('editing');
+                    editingItem.querySelector('.checklist-checkbox').style.display = '';
+                    editingItem.querySelector('.checklist-text').style.display = '';
+                    editingItem.querySelector('.checklist-edit-input').style.display = 'none';
+                    editingItem.querySelector('.checklist-edit-btn').style.display = 'none';
+                    btn.innerHTML = '<i class="fas fa-pen"></i>';
+                }
+            }
+        });
 
         function updateChecklistProgress() {
             const checked = appData.checklist.filter(c => c).length;
@@ -2773,6 +2979,23 @@
             document.getElementById('checklistProgress').style.width = percent + '%';
             document.getElementById('checklistStatus').textContent = `${checked}/${total} 完成`;
             document.getElementById('taskProgress').textContent = percent + '%';
+        }
+
+        // Save Checklist Owner
+        function saveChecklistOwner(input) {
+            const index = Array.from(document.querySelectorAll('.checklist-owner-input')).indexOf(input);
+            appData.checklistOwners[index] = input.value;
+            saveData();
+        }
+
+        // Load Checklist Owners
+        function loadChecklistOwners() {
+            const inputs = document.querySelectorAll('.checklist-owner-input');
+            inputs.forEach((input, index) => {
+                if (appData.checklistOwners && appData.checklistOwners[index]) {
+                    input.value = appData.checklistOwners[index];
+                }
+            });
         }
 
         // Modal Functions
@@ -2784,7 +3007,8 @@
             document.getElementById(id).classList.remove('active');
         }
 
-        // Add Host
+        // Add/Edit Host
+        let editingHostIndex = -1;
         function addHost() {
             const name = document.getElementById('hostName').value;
             const background = document.getElementById('hostBackground').value;
@@ -2795,11 +3019,25 @@
                 return;
             }
 
-            appData.hosts.push({ name, background, email });
+            if (editingHostIndex >= 0) {
+                appData.hosts[editingHostIndex] = { name, background, email };
+                editingHostIndex = -1;
+            } else {
+                appData.hosts.push({ name, background, email });
+            }
             renderHosts();
             saveData();
             closeModal('hostModal');
             clearModal('hostModal');
+        }
+
+        function editHost(index) {
+            const h = appData.hosts[index];
+            document.getElementById('hostName').value = h.name;
+            document.getElementById('hostBackground').value = h.background || '';
+            document.getElementById('hostEmail').value = h.email || '';
+            editingHostIndex = index;
+            openModal('hostModal');
         }
 
         function renderHosts() {
@@ -2818,6 +3056,7 @@
                         </div>
                     </div>
                     <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editHost(${i})" title="编辑"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-secondary btn-icon" onclick="deleteHost(${i})"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -2830,7 +3069,8 @@
             saveData();
         }
 
-        // Add Guest
+        // Add/Edit Guest
+        let editingGuestIndex = -1;
         function addGuest() {
             const name = document.getElementById('guestName').value;
             const title = document.getElementById('guestTitle').value;
@@ -2843,12 +3083,28 @@
                 return;
             }
 
-            appData.guests.push({ name, title, email, bio, type });
+            if (editingGuestIndex >= 0) {
+                appData.guests[editingGuestIndex] = { name, title, email, bio, type };
+                editingGuestIndex = -1;
+            } else {
+                appData.guests.push({ name, title, email, bio, type });
+            }
             renderGuests();
             updateQuickStats();
             saveData();
             closeModal('guestModal');
             clearModal('guestModal');
+        }
+
+        function editGuest(index) {
+            const g = appData.guests[index];
+            document.getElementById('guestName').value = g.name;
+            document.getElementById('guestTitle').value = g.title || '';
+            document.getElementById('guestEmail').value = g.email || '';
+            document.getElementById('guestBio').value = g.bio || '';
+            document.getElementById('guestType').value = g.type || 'other';
+            editingGuestIndex = index;
+            openModal('guestModal');
         }
 
         function renderGuests() {
@@ -2882,6 +3138,7 @@
                         </div>
                     </div>
                     <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editGuest(${i})" title="编辑"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-secondary btn-icon" onclick="deleteGuest(${i})"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -2895,7 +3152,8 @@
             saveData();
         }
 
-        // Add Timeline
+        // Add/Edit Timeline
+        let editingTimelineIndex = -1;
         function addTimeline() {
             const time = document.getElementById('timelineTime').value;
             const title = document.getElementById('timelineTitle').value;
@@ -2906,12 +3164,26 @@
                 return;
             }
 
-            appData.timeline.push({ time, title, detail });
+            if (editingTimelineIndex >= 0) {
+                appData.timeline[editingTimelineIndex] = { time, title, detail };
+                editingTimelineIndex = -1;
+            } else {
+                appData.timeline.push({ time, title, detail });
+            }
             appData.timeline.sort((a, b) => a.time.localeCompare(b.time));
             renderTimeline();
             saveData();
             closeModal('timelineModal');
             clearModal('timelineModal');
+        }
+
+        function editTimeline(index) {
+            const t = appData.timeline[index];
+            document.getElementById('timelineTime').value = t.time || '';
+            document.getElementById('timelineTitle').value = t.title || '';
+            document.getElementById('timelineDetail').value = t.detail || '';
+            editingTimelineIndex = index;
+            openModal('timelineModal');
         }
 
         function renderTimeline() {
@@ -2925,6 +3197,9 @@
                     <div class="timeline-time">${t.time || '时间待定'}</div>
                     <div class="timeline-content">${t.title}</div>
                     <div class="timeline-detail">${t.detail || ''}</div>
+                    <button class="btn btn-secondary btn-sm" onclick="editTimeline(${i})" style="margin-top: 0.5rem; margin-right: 0.5rem;">
+                        <i class="fas fa-edit"></i> 编辑
+                    </button>
                     <button class="btn btn-secondary btn-sm" style="margin-top: 0.5rem;" onclick="deleteTimeline(${i})">
                         <i class="fas fa-trash"></i> 删除
                     </button>
@@ -2938,7 +3213,8 @@
             saveData();
         }
 
-        // Add Project
+        // Add/Edit Project
+        let editingProjectIndex = -1;
         function addProject() {
             const name = document.getElementById('projectName').value;
             const type = document.getElementById('projectType').value;
@@ -2950,11 +3226,26 @@
                 return;
             }
 
-            appData.projects.push({ name, type, lead, duration });
+            if (editingProjectIndex >= 0) {
+                appData.projects[editingProjectIndex] = { name, type, lead, duration };
+                editingProjectIndex = -1;
+            } else {
+                appData.projects.push({ name, type, lead, duration });
+            }
             renderProjects();
             saveData();
             closeModal('projectModal');
             clearModal('projectModal');
+        }
+
+        function editProject(index) {
+            const p = appData.projects[index];
+            document.getElementById('projectName').value = p.name || '';
+            document.getElementById('projectType').value = p.type || 'demo';
+            document.getElementById('projectLead').value = p.lead || '';
+            document.getElementById('projectDuration').value = p.duration || '';
+            editingProjectIndex = index;
+            openModal('projectModal');
         }
 
         function renderProjects() {
@@ -2980,6 +3271,7 @@
                         </div>
                     </div>
                     <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editProject(${i})" title="编辑"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-secondary btn-icon" onclick="deleteProject(${i})"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -2992,7 +3284,8 @@
             saveData();
         }
 
-        // Add Prize
+        // Add/Edit Prize
+        let editingPrizeIndex = -1;
         function addPrize() {
             const name = document.getElementById('prizeName').value;
             const type = document.getElementById('prizeType').value;
@@ -3004,11 +3297,26 @@
                 return;
             }
 
-            appData.prizes.push({ name, type, level, quantity });
+            if (editingPrizeIndex >= 0) {
+                appData.prizes[editingPrizeIndex] = { name, type, level, quantity };
+                editingPrizeIndex = -1;
+            } else {
+                appData.prizes.push({ name, type, level, quantity });
+            }
             renderPrizes();
             saveData();
             closeModal('prizeModal');
             clearModal('prizeModal');
+        }
+
+        function editPrize(index) {
+            const p = appData.prizes[index];
+            document.getElementById('prizeName').value = p.name || '';
+            document.getElementById('prizeType').value = p.type || 'physical';
+            document.getElementById('prizeLevel').value = p.level || 'participation';
+            document.getElementById('prizeQuantity').value = p.quantity || 1;
+            editingPrizeIndex = index;
+            openModal('prizeModal');
         }
 
         function renderPrizes() {
@@ -3041,6 +3349,7 @@
                         </div>
                     </div>
                     <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editPrize(${i})" title="编辑"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-secondary btn-icon" onclick="deletePrize(${i})"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -3053,7 +3362,8 @@
             saveData();
         }
 
-        // Add Budget
+        // Add/Edit Budget
+        let editingBudgetIndex = -1;
         function addBudget() {
             const category = document.getElementById('budgetCategory').value;
             const amount = parseFloat(document.getElementById('budgetAmount').value) || 0;
@@ -3064,12 +3374,26 @@
                 return;
             }
 
-            appData.budget.push({ category, amount, note, spent: 0 });
+            if (editingBudgetIndex >= 0) {
+                appData.budget[editingBudgetIndex] = { ...appData.budget[editingBudgetIndex], category, amount, note };
+                editingBudgetIndex = -1;
+            } else {
+                appData.budget.push({ category, amount, note, spent: 0 });
+            }
             renderBudget();
             updateQuickStats();
             saveData();
             closeModal('budgetModal');
             clearModal('budgetModal');
+        }
+
+        function editBudget(index) {
+            const b = appData.budget[index];
+            document.getElementById('budgetCategory').value = b.category || 'other';
+            document.getElementById('budgetAmount').value = b.amount || '';
+            document.getElementById('budgetNote').value = b.note || '';
+            editingBudgetIndex = index;
+            openModal('budgetModal');
         }
 
         function renderBudget() {
@@ -3093,7 +3417,10 @@
                     <td class="amount">$${b.amount.toLocaleString()}</td>
                     <td><input type="number" class="form-input" style="width: 100px; padding: 0.5rem;" value="${b.spent || 0}" onchange="updateBudgetSpent(${i}, this.value)"></td>
                     <td><input type="text" class="form-input" style="width: 150px; padding: 0.5rem; font-size: 0.85rem;" value="${b.note || ''}" placeholder="添加备注..." onchange="updateBudgetNote(${i}, this.value)"></td>
-                    <td><button class="btn btn-secondary btn-sm" onclick="deleteBudget(${i})"><i class="fas fa-trash"></i></button></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editBudget(${i})" title="编辑" style="margin-right: 0.25rem;"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-sm" onclick="deleteBudget(${i})"><i class="fas fa-trash"></i></button>
+                    </td>
                 </tr>
             `).join('');
             updateTotalBudget();
@@ -3123,7 +3450,8 @@
             saveData();
         }
 
-        // Add Lead
+        // Add/Edit Lead
+        let editingLeadIndex = -1;
         function addLead() {
             const name = document.getElementById('leadName').value;
             const role = document.getElementById('leadRole').value;
@@ -3133,11 +3461,24 @@
                 return;
             }
 
-            appData.leads.push({ name, role });
+            if (editingLeadIndex >= 0) {
+                appData.leads[editingLeadIndex] = { name, role };
+                editingLeadIndex = -1;
+            } else {
+                appData.leads.push({ name, role });
+            }
             renderLeads();
             saveData();
             closeModal('leadModal');
             clearModal('leadModal');
+        }
+
+        function editLead(index) {
+            const l = appData.leads[index];
+            document.getElementById('leadName').value = l.name || '';
+            document.getElementById('leadRole').value = l.role || '';
+            editingLeadIndex = index;
+            openModal('leadModal');
         }
 
         function renderLeads() {
@@ -3152,7 +3493,10 @@
                         <div class="list-item-title">${l.name}</div>
                         <div class="list-item-subtitle">${l.role || 'Project 负责人'}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon" onclick="deleteLead(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editLead(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon" onclick="deleteLead(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3163,7 +3507,8 @@
             saveData();
         }
 
-        // Add Reception
+        // Add/Edit Reception
+        let editingReceptionIndex = -1;
         function addReception() {
             const name = document.getElementById('receptionName').value;
             const role = document.getElementById('receptionRole').value;
@@ -3173,11 +3518,24 @@
                 return;
             }
 
-            appData.reception.push({ name, role });
+            if (editingReceptionIndex >= 0) {
+                appData.reception[editingReceptionIndex] = { name, role };
+                editingReceptionIndex = -1;
+            } else {
+                appData.reception.push({ name, role });
+            }
             renderReception();
             saveData();
             closeModal('receptionModal');
             clearModal('receptionModal');
+        }
+
+        function editReception(index) {
+            const r = appData.reception[index];
+            document.getElementById('receptionName').value = r.name || '';
+            document.getElementById('receptionRole').value = r.role || '';
+            editingReceptionIndex = index;
+            openModal('receptionModal');
         }
 
         function renderReception() {
@@ -3192,7 +3550,10 @@
                         <div class="list-item-title">${r.name}</div>
                         <div class="list-item-subtitle">${r.role || '客户沟通接待'}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon" onclick="deleteReception(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editReception(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon" onclick="deleteReception(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3203,7 +3564,8 @@
             saveData();
         }
 
-        // Add VIP
+        // Add/Edit VIP
+        let editingVIPIndex = -1;
         function addVIP() {
             const name = document.getElementById('vipName').value;
             const handler = document.getElementById('vipHandler').value;
@@ -3213,11 +3575,24 @@
                 return;
             }
 
-            appData.vips.push({ name, handler });
+            if (editingVIPIndex >= 0) {
+                appData.vips[editingVIPIndex] = { name, handler };
+                editingVIPIndex = -1;
+            } else {
+                appData.vips.push({ name, handler });
+            }
             renderVIPs();
             saveData();
             closeModal('vipModal');
             clearModal('vipModal');
+        }
+
+        function editVIP(index) {
+            const v = appData.vips[index];
+            document.getElementById('vipName').value = v.name || '';
+            document.getElementById('vipHandler').value = v.handler || '';
+            editingVIPIndex = index;
+            openModal('vipModal');
         }
 
         function renderVIPs() {
@@ -3232,7 +3607,10 @@
                         <div class="list-item-title">${v.name}</div>
                         <div class="list-item-subtitle">接待人: ${v.handler || '待定'}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon" onclick="deleteVIP(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editVIP(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon" onclick="deleteVIP(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3243,7 +3621,8 @@
             saveData();
         }
 
-        // Add Raffle Host
+        // Add/Edit Raffle Host
+        let editingRaffleHostIndex = -1;
         function addRaffleHost() {
             const name = document.getElementById('raffleName').value;
             const title = document.getElementById('raffleTitle').value;
@@ -3253,11 +3632,24 @@
                 return;
             }
 
-            appData.raffleHosts.push({ name, title });
+            if (editingRaffleHostIndex >= 0) {
+                appData.raffleHosts[editingRaffleHostIndex] = { name, title };
+                editingRaffleHostIndex = -1;
+            } else {
+                appData.raffleHosts.push({ name, title });
+            }
             renderRaffleHosts();
             saveData();
             closeModal('raffleModal');
             clearModal('raffleModal');
+        }
+
+        function editRaffleHost(index) {
+            const r = appData.raffleHosts[index];
+            document.getElementById('raffleName').value = r.name || '';
+            document.getElementById('raffleTitle').value = r.title || '';
+            editingRaffleHostIndex = index;
+            openModal('raffleModal');
         }
 
         function renderRaffleHosts() {
@@ -3272,7 +3664,10 @@
                         <div class="list-item-title">${r.name}</div>
                         <div class="list-item-subtitle">${r.title || '抽奖嘉宾'}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon" onclick="deleteRaffleHost(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon" onclick="editRaffleHost(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon" onclick="deleteRaffleHost(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3283,7 +3678,8 @@
             saveData();
         }
 
-        // Add Poster
+        // Add/Edit Poster
+        let editingPosterIndex = -1;
         function addPoster() {
             const name = document.getElementById('posterName').value;
             const url = document.getElementById('posterUrl').value;
@@ -3293,11 +3689,24 @@
                 return;
             }
 
-            appData.posters.push({ name, url });
+            if (editingPosterIndex >= 0) {
+                appData.posters[editingPosterIndex] = { name, url };
+                editingPosterIndex = -1;
+            } else {
+                appData.posters.push({ name, url });
+            }
             renderPosters();
             saveData();
             closeModal('posterModal');
             clearModal('posterModal');
+        }
+
+        function editPoster(index) {
+            const p = appData.posters[index];
+            document.getElementById('posterName').value = p.name || '';
+            document.getElementById('posterUrl').value = p.url || '';
+            editingPosterIndex = index;
+            openModal('posterModal');
         }
 
         function renderPosters() {
@@ -3311,7 +3720,10 @@
                     <div class="list-item-content">
                         <div class="list-item-title" style="font-size: 0.85rem;">${p.name}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon btn-sm" onclick="deletePoster(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editPoster(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="deletePoster(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3322,7 +3734,8 @@
             saveData();
         }
 
-        // Add Video
+        // Add/Edit Video
+        let editingVideoIndex = -1;
         function addVideo() {
             const name = document.getElementById('videoName').value;
             const url = document.getElementById('videoUrl').value;
@@ -3332,11 +3745,24 @@
                 return;
             }
 
-            appData.videos.push({ name, url });
+            if (editingVideoIndex >= 0) {
+                appData.videos[editingVideoIndex] = { name, url };
+                editingVideoIndex = -1;
+            } else {
+                appData.videos.push({ name, url });
+            }
             renderVideos();
             saveData();
             closeModal('videoModal');
             clearModal('videoModal');
+        }
+
+        function editVideo(index) {
+            const v = appData.videos[index];
+            document.getElementById('videoName').value = v.name || '';
+            document.getElementById('videoUrl').value = v.url || '';
+            editingVideoIndex = index;
+            openModal('videoModal');
         }
 
         function renderVideos() {
@@ -3350,7 +3776,10 @@
                     <div class="list-item-content">
                         <div class="list-item-title" style="font-size: 0.85rem;">${v.name}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteVideo(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editVideo(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteVideo(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3361,7 +3790,8 @@
             saveData();
         }
 
-        // Add Banner
+        // Add/Edit Banner
+        let editingBannerIndex = -1;
         function addBanner() {
             const name = document.getElementById('bannerName').value;
             const location = document.getElementById('bannerLocation').value;
@@ -3371,11 +3801,24 @@
                 return;
             }
 
-            appData.banners.push({ name, location });
+            if (editingBannerIndex >= 0) {
+                appData.banners[editingBannerIndex] = { name, location };
+                editingBannerIndex = -1;
+            } else {
+                appData.banners.push({ name, location });
+            }
             renderBanners();
             saveData();
             closeModal('bannerModal');
             clearModal('bannerModal');
+        }
+
+        function editBanner(index) {
+            const b = appData.banners[index];
+            document.getElementById('bannerName').value = b.name || '';
+            document.getElementById('bannerLocation').value = b.location || '';
+            editingBannerIndex = index;
+            openModal('bannerModal');
         }
 
         function renderBanners() {
@@ -3390,7 +3833,10 @@
                         <div class="list-item-title" style="font-size: 0.85rem;">${b.name}</div>
                         <div class="list-item-subtitle" style="font-size: 0.75rem;">${b.location || ''}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteBanner(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editBanner(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteBanner(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3401,17 +3847,32 @@
             saveData();
         }
 
-        // Add Social Post
+        // Add/Edit Social Post
+        let editingSocialPostIndex = -1;
         function addSocialPost() {
             const date = document.getElementById('postDate').value;
             const platform = document.getElementById('postPlatform').value;
             const content = document.getElementById('postContent').value;
 
-            appData.socialPosts.push({ date, platform, content });
+            if (editingSocialPostIndex >= 0) {
+                appData.socialPosts[editingSocialPostIndex] = { date, platform, content };
+                editingSocialPostIndex = -1;
+            } else {
+                appData.socialPosts.push({ date, platform, content });
+            }
             renderSocialPosts();
             saveData();
             closeModal('socialPostModal');
             clearModal('socialPostModal');
+        }
+
+        function editSocialPost(index) {
+            const p = appData.socialPosts[index];
+            document.getElementById('postDate').value = p.date || '';
+            document.getElementById('postPlatform').value = p.platform || 'all';
+            document.getElementById('postContent').value = p.content || '';
+            editingSocialPostIndex = index;
+            openModal('socialPostModal');
         }
 
         function renderSocialPosts() {
@@ -3433,7 +3894,10 @@
                         <div class="list-item-title">${p.date || '日期待定'} <i class="${platformIcons[p.platform]}"></i></div>
                         <div class="list-item-subtitle">${p.content || '内容待定'}</div>
                     </div>
-                    <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteSocialPost(${i})"><i class="fas fa-trash"></i></button>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editSocialPost(${i})" title="编辑"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteSocialPost(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -3562,6 +4026,7 @@
             renderBanners();
             renderSocialPosts();
             updateChecklistProgress();
+            loadChecklistOwners();
 
             // Promo projects checkboxes
             appData.promoProjects.forEach(p => {
@@ -3885,7 +4350,7 @@
                     videos: [],
                     banners: [],
                     socialPosts: [],
-                    checklist: Array(10).fill(false),
+                    checklist: Array(15).fill(false),
                     promoProjects: [...LAS_VEGAS_DATA.promoProjects],
                     ageGroups: [...LAS_VEGAS_DATA.ageGroups],
                     social: { instagram: '', facebook: '', youtube: '', xiaohongshu: '' },
