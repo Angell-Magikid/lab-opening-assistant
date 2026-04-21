@@ -2183,7 +2183,7 @@
             { id: 'senior', name: 'Senior课程', desc: '银发族科技课程', icon: '👴‍👵' }
         ];
 
-        // LAS VEGAS LAB - Pre-filled Data (May 16, 2026)
+        // LAS VEGAS LAB - Complete Pre-filled Data (May 16, 2026)
         const LAS_VEGAS_DATA = {
             lab: {
                 name: 'MAGIKID Las Vegas Lab',
@@ -2193,55 +2193,86 @@
             },
             hosts: [
                 {
-                    name: 'Bruce & 太太（新东西方学校创始人）',
-                    background: 'Las Vegas知名人士，前美国商务部重要领导之一，负责美国和中国商务关系合作，引进WeChat进入美国。退休后与太太（知名中国教育家、媒体主播）创办10年历史的East-West School，常年举办国际象棋大赛和中文考试等。',
+                    name: 'Bruce & 太太（East-West School创始人）',
+                    background: '前美国商务部重要领导之一，负责美国和中国商务关系合作，引进WeChat进入美国，协调最早的美国商务团访问中国。退休后与太太（知名中国教育家、媒体主播）在Las Vegas创办10年历史的新东西方学校（East-West School），常年举办国际象棋大赛和中文考试等，当地口碑极佳。',
+                    email: ''
+                },
+                {
+                    name: '太太（East-West School 校长）',
+                    background: '知名中国教育家、媒体主播，10年办学经验，East-West School联合创始人，常年举办本地国际象棋大赛和中文考试。',
                     email: ''
                 }
             ],
             timeline: [
-                { time: '11:00', title: '开业典礼 · 剪彩仪式', detail: '主持人：Matt (MAGIKID课程总监，华盛顿大学毕业，10年STEM教育经验)\n发言嘉宾：校长(太太)、Bruce、市长、Angell' },
-                { time: '11:30', title: '斯坦福博士后演讲', detail: '主题：Can Life Engineering?\n斯坦福博士后分享AI与生命的未来' },
-                { time: '12:00', title: '自助午餐', detail: '午餐交流时间' },
-                { time: '12:30', title: '展示项目①', detail: '机器手动作捕捉\n世界冠军机器人\n自动发牌机' },
-                { time: '13:00', title: '互动体验项目', detail: '① 机器人拔河比赛\n② 足球世界杯机器人守门员\n③ AI自主开发体验' },
-                { time: '13:30', title: 'NASA Space Apps Challenge分享', detail: '全球奖获奖者分享\nTOP 80 教育模式' },
-                { time: '14:00', title: '抽奖 · 结束', detail: '抽奖环节 & 第一轮客户沟通' },
-                { time: '15:00', title: '下午场开始（重复上午内容）', detail: '斯坦福演讲 → 展示 → 互动 → 分享 → 抽奖' }
+                { time: '11:00', title: '🎉 开业典礼 · 剪彩仪式', detail: '【主持人】Matt - MAGIKID课程总监，华盛顿大学毕业，美国最早的STEM教育专业本科生，10年MAGIKID工作经验\n\n【发言嘉宾】\n1. 校长(太太) - East-West School\n2. Bruce - 前美国商务部重要领导\n3. 市长 - Las Vegas市政代表\n4. Angell - MAGIKID创始人' },
+                { time: '11:30', title: '🎓 斯坦福博士后演讲', detail: '主题：Can Life Engineering?\n斯坦福博士后分享AI与生命的未来\n时长：30分钟' },
+                { time: '12:00', title: '🍽️ 自助午餐', detail: '午餐交流时间\n嘉宾与家长互动环节' },
+                { time: '12:30', title: '🤖 展示项目', detail: '【展示项目】\n1. 机器手动作捕捉\n2. 世界冠军机器人\n3. 自动发牌机\n时长：30分钟' },
+                { time: '13:00', title: '🎮 互动体验项目', detail: '【互动体验 - 3个项目轮流】\n1. 机器人拔河比赛\n2. 足球世界杯机器人守门员\n3. AI自主开发体验\n时长：30分钟' },
+                { time: '13:30', title: '🏆 NASA分享', detail: 'NASA Space Apps Challenge 全球奖获奖者分享\n- TOP 80 教育模式\n- 全球赛经验分享\n时长：30分钟' },
+                { time: '14:00', title: '🎁 抽奖 · 结束 & 客户沟通', detail: '【抽奖环节】\n【第一轮客户深度沟通】' },
+                { time: '15:00', title: '🔄 下午场（重复上午内容）', detail: '15:00 斯坦福博士后演讲\n15:30 自助午餐\n16:00 展示项目\n16:30 互动体验\n17:00 NASA分享\n17:30 抽奖 & 结束' }
             ],
             guests: [
-                { name: 'Las Vegas 市长', title: '市政代表', email: '', bio: '当地政府代表', type: 'vip' },
-                { name: '两党议员', title: '议员代表', email: '', bio: '政界代表', type: 'vip' },
-                { name: 'Matt', title: 'MAGIKID课程总监', email: '', bio: '华盛顿大学毕业，10年MAGIKID工作经验，美国最早的STEM教育专业本科生', type: 'speaker' },
-                { name: 'Angell', title: 'MAGIKID创始人', email: '', bio: 'MAGIKID AI教育体系创始人', type: 'speaker' }
+                { name: 'Las Vegas 市长', title: '市政代表', email: '', bio: 'Las Vegas当地政府代表', type: 'vip' },
+                { name: '两党议员', title: '议员代表', email: '', bio: '政界名流代表', type: 'vip' },
+                { name: 'Matt', title: 'MAGIKID课程总监 / 主持人', email: '', bio: '华盛顿大学毕业，美国最早的STEM教育专业本科生，10年MAGIKID工作经验', type: 'speaker' },
+                { name: 'Angell', title: 'MAGIKID创始人', email: '', bio: 'MAGIKID AI教育体系创始人，IOAI美国国家队培训负责人', type: 'speaker' },
+                { name: 'Bruce', title: '前美国商务部重要领导 / 主理人', email: '', bio: '负责美国和中国商务关系合作，引进WeChat进入美国，East-West School联合创始人', type: 'vip' },
+                { name: '校长(太太)', title: 'East-West School 校长 / 主理人', email: '', bio: '知名中国教育家、媒体主播，10年办学经验', type: 'vip' },
+                { name: '斯坦福博士后', title: '演讲嘉宾', email: '', bio: '演讲主题：Can Life Engineering?', type: 'speaker' },
+                { name: 'NASA获奖者', title: '分享嘉宾', email: '', bio: 'NASA Space Apps Challenge 全球奖获奖者', type: 'speaker' }
             ],
             projects: [
-                { name: '机器手动作捕捉', type: 'demo', lead: '', duration: 30 },
-                { name: '世界冠军机器人展示', type: 'demo', lead: '', duration: 30 },
-                { name: '自动发牌机', type: 'demo', lead: '', duration: 30 },
-                { name: '机器人拔河比赛', type: 'interactive', lead: '', duration: 30 },
-                { name: '足球世界杯机器人守门员', type: 'competition', lead: '', duration: 30 },
-                { name: 'AI自主开发体验', type: 'ai', lead: '', duration: 30 }
+                { name: '🤖 机器手动作捕捉', type: 'demo', lead: '', duration: 30 },
+                { name: '🏆 世界冠军机器人展示', type: 'demo', lead: '', duration: 30 },
+                { name: '🎰 自动发牌机', type: 'demo', lead: '', duration: 30 },
+                { name: '💪 机器人拔河比赛', type: 'interactive', lead: '', duration: 30 },
+                { name: '⚽ 足球世界杯机器人守门员', type: 'competition', lead: '', duration: 30 },
+                { name: '🧠 AI自主开发体验', type: 'ai', lead: '', duration: 30 }
             ],
             prizes: [
-                { name: '免费体验课一次', type: 'raffle', level: 'participation', quantity: 20 },
-                { name: '免费夏令营一天', type: 'raffle', level: 'second', quantity: 10 },
-                { name: '免费生日派对一次', type: 'raffle', level: 'first', quantity: 3 },
-                { name: '大奖：免费夏令营一周', type: 'raffle', level: 'grand', quantity: 1 },
-                { name: '最佳体验分享奖一等奖', type: 'competition', level: 'first', quantity: 1 },
-                { name: '最佳体验分享奖二等奖', type: 'competition', level: 'second', quantity: 2 }
+                // 投票最佳体验分享奖
+                { name: '🎖️ 投票最佳体验分享奖一等奖：免费夏令营一天 + MAGIKID T恤', type: 'competition', level: 'first', quantity: 1 },
+                { name: '🎖️ 投票最佳体验分享奖二等奖：免费夏令营一天', type: 'competition', level: 'second', quantity: 2 },
+                // 抽奖奖品
+                { name: '🎟️ 抽奖：免费体验课一次', type: 'raffle', level: 'participation', quantity: 20 },
+                { name: '🎟️ 抽奖：免费夏令营一天', type: 'raffle', level: 'second', quantity: 5 },
+                { name: '🎟️ 抽奖：免费生日派对一次', type: 'raffle', level: 'first', quantity: 3 },
+                { name: '🎁 大奖：免费夏令营一周', type: 'raffle', level: 'grand', quantity: 1 }
             ],
             budget: [
-                { category: 'food', amount: 2000, note: '自助午餐', spent: 0 },
-                { category: 'souvenirs', amount: 500, note: '纪念品/T恤', spent: 0 },
-                { category: 'printing', amount: 300, note: '海报/易拉宝印刷', spent: 0 }
+                { category: 'travel', amount: 3000, note: '团队差旅费（机票、酒店）', spent: 0 },
+                { category: 'food', amount: 2500, note: '自助午餐（50人）', spent: 0 },
+                { category: 'printing', amount: 800, note: '海报、易拉宝、宣传册印刷', spent: 0 },
+                { category: 'souvenirs', amount: 1000, note: 'MAGIKID T恤、纪念品、奖品', spent: 0 }
             ],
-            promoProjects: ['robotics', 'ai-camp', 'vex-iq', 'nasa', 'ioai', 'birthday', 'private'],
+            promoProjects: ['robotics', 'ai-camp', 'vex-iq', 'nasa', 'stanford', 'vex-ai', 'ioai', 'private', 'birthday', 'adult', 'senior'],
             ageGroups: ['prek', 'elem', 'middle', 'adult', 'senior'],
+            leads: [
+                { name: 'Matt', role: '总负责人 / 主持人' },
+                { name: 'TBD', role: 'Project 负责人 1' },
+                { name: 'TBD', role: 'Project 负责人 2' },
+                { name: 'TBD', role: 'Project 负责人 3' },
+                { name: 'TBD', role: 'Project 负责人 4' }
+            ],
+            reception: [
+                { name: 'TBD', role: '客户沟通接待 1' },
+                { name: 'TBD', role: '客户沟通接待 2' }
+            ],
+            vips: [
+                { name: '市长', handler: 'TBD' },
+                { name: '两党议员', handler: 'TBD' }
+            ],
+            raffleHosts: [
+                { name: 'Bruce', title: '主理人' },
+                { name: 'Angell', title: 'MAGIKID创始人' }
+            ],
             goals: {
                 camp: 30,
                 vexElementary: '1个',
                 vexMiddle: '1个',
-                other: '建立VEX IQ赛队、收集潜在客户信息50+、社交媒体互动100+'
+                other: '收集潜在客户信息50+，社交媒体互动100+，当日课程报名20% OFF'
             }
         };
 
