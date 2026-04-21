@@ -9,22 +9,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #111827;
-            --bg-card: #1a2235;
-            --bg-card-hover: #232d45;
-            --accent-gold: #d4a853;
-            --accent-gold-light: #f0d48a;
-            --accent-cyan: #4ecdc4;
-            --accent-cyan-dim: #3ba89f;
+            /* Core Brand Colors - AI Robotics Lab */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #0f0f18;
+            --bg-card: #141420;
+            --bg-card-hover: #1a1a28;
+            
+            /* Primary: Electric Blue */
+            --accent-cyan: #00d4ff;
+            --accent-cyan-dim: #0099cc;
+            --accent-cyan-glow: rgba(0, 212, 255, 0.3);
+            
+            /* Accent: Gold */
+            --accent-gold: #ffd700;
+            --accent-gold-light: #ffed4a;
+            --accent-gold-glow: rgba(255, 215, 0, 0.3);
+            
+            /* Text */
             --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border-color: #2d3a52;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
+            --text-secondary: #a0a8c0;
+            --text-muted: #606880;
+            
+            /* Borders & States */
+            --border-color: #2a2a40;
+            --border-glow: rgba(0, 212, 255, 0.2);
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff4466;
+            --info: #00d4ff;
         }
 
         * {
@@ -39,12 +51,47 @@
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Starfield Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
@@ -67,27 +114,40 @@
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dim) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            box-shadow: 0 0 20px var(--accent-cyan-glow), inset 0 0 15px rgba(255, 255, 255, 0.1);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--accent-cyan-glow), inset 0 0 15px rgba(255, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 35px var(--accent-cyan-glow), inset 0 0 20px rgba(255, 255, 255, 0.2); }
         }
 
         .logo-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #ffffff 50%, var(--accent-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-cyan-glow);
         }
 
         .logo-text span {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         .header-actions {
@@ -124,38 +184,48 @@
             padding: 0.625rem 1.25rem;
             border-radius: 8px;
             font-size: 0.875rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             border: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
             color: var(--bg-primary);
+            box-shadow: 0 0 15px var(--accent-gold-glow);
         }
 
         .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 25px var(--accent-gold-glow);
         }
 
         .btn-secondary {
             background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-card-hover);
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px var(--accent-cyan-glow);
         }
 
         .btn-cyan {
             background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dim) 100%);
             color: var(--bg-primary);
+            box-shadow: 0 0 15px var(--accent-cyan-glow);
+        }
+        
+        .btn-cyan:hover {
+            box-shadow: 0 0 25px var(--accent-cyan-glow);
         }
 
         .btn-sm {
@@ -182,9 +252,10 @@
 
         /* Section Cards */
         .section-card {
-            background: var(--bg-card);
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(20, 20, 32, 0.8) 100%);
             border-radius: 16px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
             margin-bottom: 1.5rem;
             overflow: hidden;
         }
@@ -196,23 +267,27 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.03) 0%, transparent 100%);
         }
 
         .section-header:hover {
-            background: var(--bg-card-hover);
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.08) 0%, transparent 100%);
         }
 
         .section-header h2 {
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
 
         .section-header h2 i {
-            color: var(--accent-gold);
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
         .section-toggle {
@@ -269,8 +344,8 @@
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px var(--accent-cyan-glow), 0 0 20px var(--accent-cyan-glow);
         }
 
         .form-textarea {
@@ -351,16 +426,23 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(180deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+            background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+            box-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
         .timeline-item {
             position: relative;
             margin-bottom: 1.5rem;
             padding: 1rem;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-cyan-glow);
         }
 
         .timeline-item::before {
@@ -368,23 +450,34 @@
             position: absolute;
             left: -1.625rem;
             top: 1.25rem;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-gold);
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
             border-radius: 50%;
             border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 15px var(--accent-cyan-glow);
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes dot-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
         .timeline-time {
             font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--accent-gold);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
 
         .timeline-content {
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
         .timeline-detail {
@@ -430,20 +523,31 @@
             padding: 1.25rem;
             border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 30px var(--accent-cyan-glow);
+            transform: translateY(-3px);
         }
 
         .stat-card .number {
             font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-cyan-glow);
         }
 
         .stat-card .label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
             margin-top: 0.25rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
         /* Checklist */
@@ -511,7 +615,8 @@
         }
 
         .tags-input-container:focus-within {
-            border-color: var(--accent-gold);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan-glow);
         }
 
         .tag-item {
@@ -569,12 +674,12 @@
         .checkbox-item input {
             width: 18px;
             height: 18px;
-            accent-color: var(--accent-gold);
+            accent-color: var(--accent-cyan);
         }
 
         .checkbox-item.checked {
-            background: rgba(212, 168, 83, 0.1);
-            border: 1px solid var(--accent-gold);
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
         }
 
         /* Budget Table */
@@ -602,20 +707,22 @@
 
         .budget-table .amount {
             font-weight: 600;
-            color: var(--accent-gold);
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
         .budget-table .total-row td {
             font-weight: 700;
             font-size: 1.1rem;
-            border-top: 2px solid var(--accent-gold);
+            border-top: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
         }
 
         /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -623,6 +730,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
 
         .modal-overlay.active {
@@ -639,6 +747,8 @@
             overflow-y: auto;
             transform: translateY(20px);
             transition: transform 0.3s;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
         }
 
         .modal-overlay.active .modal {
@@ -651,11 +761,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%);
         }
 
         .modal-header h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
         }
 
         .modal-close {
@@ -665,10 +779,11 @@
             cursor: pointer;
             font-size: 1.25rem;
             padding: 0.5rem;
+            transition: color 0.2s;
         }
 
         .modal-close:hover {
-            color: var(--text-primary);
+            color: var(--accent-cyan);
         }
 
         .modal-body {
@@ -697,22 +812,26 @@
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             cursor: pointer;
             border-radius: 8px 8px 0 0;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .tab-btn:hover {
-            color: var(--text-primary);
-            background: var(--bg-card);
+            color: var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.05);
         }
 
         .tab-btn.active {
-            color: var(--accent-gold);
-            background: var(--bg-card);
-            border-bottom: 2px solid var(--accent-gold);
+            color: var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.1);
+            border-bottom: 2px solid var(--accent-cyan);
+            box-shadow: 0 2px 15px var(--accent-cyan-glow);
         }
 
         .tab-content {
@@ -729,13 +848,15 @@
             background: var(--bg-secondary);
             border-radius: 4px;
             overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
             border-radius: 4px;
             transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
         /* Email Template */
@@ -751,14 +872,16 @@
         .email-preview .email-header {
             text-align: center;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-gold);
+            border-bottom: 2px solid var(--accent-cyan);
             margin-bottom: 1rem;
         }
 
         .email-preview .email-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent-gold);
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         /* Import Section */
@@ -769,15 +892,17 @@
             padding: 2rem;
             text-align: center;
             margin-bottom: 1rem;
+            transition: all 0.3s;
         }
 
         .import-section:hover {
-            border-color: var(--accent-gold);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-cyan-glow);
         }
 
         .import-section i {
             font-size: 2rem;
-            color: var(--accent-gold);
+            color: var(--accent-cyan);
             margin-bottom: 0.75rem;
         }
 
@@ -913,6 +1038,7 @@
     </style>
 </head>
 <body>
+    <div class="grid-bg"></div>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -1892,7 +2018,7 @@
         // ===== i18n Translation System =====
         const translations = {
             zh: {
-                appTitle: 'MAGIKID Lab 开业助手',
+                appTitle: 'MAGIKID AI ROBOTICS LAB',
                 appSubtitle: 'Opening Assistant',
                 labBasicInfo: 'Lab 基本信息',
                 labHost: 'Lab 主理人',
@@ -2017,7 +2143,7 @@
                 postPlan: '发布计划'
             },
             en: {
-                appTitle: 'MAGIKID Lab Opening Assistant',
+                appTitle: 'MAGIKID AI ROBOTICS LAB',
                 appSubtitle: 'Assistant',
                 labBasicInfo: 'Lab Basic Info',
                 labHost: 'Lab Hosts',
@@ -2193,33 +2319,33 @@
             },
             hosts: [
                 {
-                    name: 'Bruce & 太太（East-West School创始人）',
-                    background: '前美国商务部重要领导之一，负责美国和中国商务关系合作，引进WeChat进入美国，协调最早的美国商务团访问中国。退休后与太太（知名中国教育家、媒体主播）在Las Vegas创办10年历史的新东西方学校（East-West School），常年举办国际象棋大赛和中文考试等，当地口碑极佳。',
+                    name: 'Bruce（Las Vegas 知名人士）',
+                    background: '前美国商务部重要领导之一，负责美国和中国商务关系合作，引进WeChat进入美国，协调最早的美国商务团访问中国。退休后在Las Vegas创办10年历史的East-West School，常年举办本地国际象棋大赛和中文考试等，当地口碑极佳。',
                     email: ''
                 },
                 {
-                    name: '太太（East-West School 校长）',
-                    background: '知名中国教育家、媒体主播，10年办学经验，East-West School联合创始人，常年举办本地国际象棋大赛和中文考试。',
+                    name: 'Susan（East-West School 校长 / 知名教育家）',
+                    background: '知名教育家、媒体主播，East-West School联合创始人，10年办学经验，常年举办本地国际象棋大赛和中文考试。',
                     email: ''
                 }
             ],
             timeline: [
-                { time: '11:00', title: '🎉 开业典礼 · 剪彩仪式', detail: '【主持人】Matt - MAGIKID课程总监，华盛顿大学毕业，美国最早的STEM教育专业本科生，10年MAGIKID工作经验\n\n【发言嘉宾】\n1. 校长(太太) - East-West School\n2. Bruce - 前美国商务部重要领导\n3. 市长 - Las Vegas市政代表\n4. Angell - MAGIKID创始人' },
-                { time: '11:30', title: '🎓 斯坦福博士后演讲', detail: '主题：Can Life Engineering?\n斯坦福博士后分享AI与生命的未来\n时长：30分钟' },
-                { time: '12:00', title: '🍽️ 自助午餐', detail: '午餐交流时间\n嘉宾与家长互动环节' },
-                { time: '12:30', title: '🤖 展示项目', detail: '【展示项目】\n1. 机器手动作捕捉\n2. 世界冠军机器人\n3. 自动发牌机\n时长：30分钟' },
-                { time: '13:00', title: '🎮 互动体验项目', detail: '【互动体验 - 3个项目轮流】\n1. 机器人拔河比赛\n2. 足球世界杯机器人守门员\n3. AI自主开发体验\n时长：30分钟' },
-                { time: '13:30', title: '🏆 NASA分享', detail: 'NASA Space Apps Challenge 全球奖获奖者分享\n- TOP 80 教育模式\n- 全球赛经验分享\n时长：30分钟' },
-                { time: '14:00', title: '🎁 抽奖 · 结束 & 客户沟通', detail: '【抽奖环节】\n【第一轮客户深度沟通】' },
-                { time: '15:00', title: '🔄 下午场（重复上午内容）', detail: '15:00 斯坦福博士后演讲\n15:30 自助午餐\n16:00 展示项目\n16:30 互动体验\n17:00 NASA分享\n17:30 抽奖 & 结束' }
+                { time: '11:00', title: '🎓 East-West School 学期末颁奖典礼', detail: '【主持人】Matt - MAGIKID课程总监\n\n【典礼内容】\n- 学期末优秀学生表彰\n- 学生才艺展示\n- 年度颁奖环节' },
+                { time: '11:30', title: '🎉 MAGIKID Las Vegas Lab 开业典礼', detail: '【主持人】Matt\n\n【剪彩仪式 & 发言嘉宾】\n1. Susan - East-West School 校长（主办方）\n2. Bruce - Las Vegas知名人士（主办方）\n3. 市长 - Las Vegas市政代表\n4. 两党议员 - 政商名流代表\n5. Angell - MAGIKID创始人' },
+                { time: '12:00', title: '🎓 斯坦福博士后演讲', detail: '主题：Can Life Engineering?\n斯坦福博士后分享AI与生命的未来\n时长：30分钟' },
+                { time: '12:30', title: '🍽️ 自助午餐', detail: '午餐交流时间\n嘉宾、家长、MAGIKID团队互动环节' },
+                { time: '13:00', title: '🤖 展示项目', detail: '【展示项目】\n1. 机器手动作捕捉\n2. 世界冠军机器人\n3. 自动发牌机\n时长：30分钟' },
+                { time: '13:30', title: '🎮 互动体验项目', detail: '【互动体验 - 3个项目轮流】\n1. 机器人拔河比赛\n2. 足球世界杯机器人守门员\n3. AI自主开发体验\n时长：30分钟' },
+                { time: '14:00', title: '🏆 NASA分享', detail: 'NASA Space Apps Challenge 全球奖获奖者分享\n- TOP 80 教育模式\n- 全球赛经验分享\n时长：30分钟' },
+                { time: '14:30', title: '🎁 抽奖 · 结束 & 客户沟通', detail: '【抽奖环节】\n【客户深度沟通 & 课程咨询】' }
             ],
             guests: [
                 { name: 'Las Vegas 市长', title: '市政代表', email: '', bio: 'Las Vegas当地政府代表', type: 'vip' },
-                { name: '两党议员', title: '议员代表', email: '', bio: '政界名流代表', type: 'vip' },
+                { name: '两党议员', title: '政商名流代表', email: '', bio: '当地政界名流', type: 'vip' },
                 { name: 'Matt', title: 'MAGIKID课程总监 / 主持人', email: '', bio: '华盛顿大学毕业，美国最早的STEM教育专业本科生，10年MAGIKID工作经验', type: 'speaker' },
                 { name: 'Angell', title: 'MAGIKID创始人', email: '', bio: 'MAGIKID AI教育体系创始人，IOAI美国国家队培训负责人', type: 'speaker' },
-                { name: 'Bruce', title: '前美国商务部重要领导 / 主理人', email: '', bio: '负责美国和中国商务关系合作，引进WeChat进入美国，East-West School联合创始人', type: 'vip' },
-                { name: '校长(太太)', title: 'East-West School 校长 / 主理人', email: '', bio: '知名中国教育家、媒体主播，10年办学经验', type: 'vip' },
+                { name: 'Bruce', title: 'Las Vegas知名人士 / 主办方主理人', email: '', bio: '前美国商务部重要领导，引进WeChat进入美国，East-West School联合创始人', type: 'vip' },
+                { name: 'Susan', title: 'East-West School 校长 / 主办方主理人', email: '', bio: '知名教育家、媒体主播，10年办学经验', type: 'vip' },
                 { name: '斯坦福博士后', title: '演讲嘉宾', email: '', bio: '演讲主题：Can Life Engineering?', type: 'speaker' },
                 { name: 'NASA获奖者', title: '分享嘉宾', email: '', bio: 'NASA Space Apps Challenge 全球奖获奖者', type: 'speaker' }
             ],
@@ -2261,11 +2387,12 @@
                 { name: 'TBD', role: '客户沟通接待 2' }
             ],
             vips: [
-                { name: '市长', handler: 'TBD' },
-                { name: '两党议员', handler: 'TBD' }
+                { name: '市长（Las Vegas市政代表）', handler: 'Bruce & Susan' },
+                { name: '两党议员（政商名流）', handler: 'Bruce & Susan' }
             ],
             raffleHosts: [
-                { name: 'Bruce', title: '主理人' },
+                { name: 'Bruce', title: '主办方主理人' },
+                { name: 'Susan', title: '主办方主理人' },
                 { name: 'Angell', title: 'MAGIKID创始人' }
             ],
             goals: {
