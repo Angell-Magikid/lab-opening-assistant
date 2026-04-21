@@ -859,6 +859,123 @@
             box-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
+        /* Age Structure */
+        .age-structure {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .age-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 1fr 2fr;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .age-row:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan-glow);
+        }
+
+        .age-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .age-range {
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-size: 1rem;
+        }
+
+        .age-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .age-input-group .form-input {
+            width: 80px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .age-input-group .form-input.age-count {
+            background: var(--bg-card);
+        }
+
+        .input-unit {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            min-width: 20px;
+        }
+
+        .age-bar {
+            height: 24px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .age-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+            border-radius: 12px;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--accent-cyan-glow);
+            min-width: 2px;
+        }
+
+        .age-total {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1rem 0;
+            border-top: 2px solid var(--border-color);
+            margin-top: 0.5rem;
+        }
+
+        .total-label {
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .total-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .total-unit {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .age-row {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+            }
+            .age-label {
+                grid-column: 1 / -1;
+            }
+            .age-bar {
+                grid-column: 1 / -1;
+            }
+        }
+
         /* Email Template */
         .email-preview {
             background: var(--bg-secondary);
@@ -1334,19 +1451,67 @@
             </div>
         </div>
 
-        <!-- Section 8: 覆盖年龄 -->
+        <!-- Section 8: 学生年龄结构 -->
         <div class="section-card">
             <div class="section-header" onclick="toggleSection(this)">
-                <h2><i class="fas fa-child"></i> 覆盖年龄层</h2>
+                <h2><i class="fas fa-child"></i> 学生年龄结构</h2>
                 <i class="fas fa-chevron-down section-toggle"></i>
             </div>
             <div class="section-content">
-                <div class="checkbox-grid" id="ageGroups">
-                    <label class="checkbox-item"><input type="checkbox" value="prek"> PreK - 3岁</label>
-                    <label class="checkbox-item"><input type="checkbox" value="elem"> 4-9岁</label>
-                    <label class="checkbox-item"><input type="checkbox" value="middle"> 10-12岁</label>
-                    <label class="checkbox-item"><input type="checkbox" value="adult"> 成年人</label>
-                    <label class="checkbox-item"><input type="checkbox" value="senior"> Senior</label>
+                <div class="age-structure">
+                    <div class="age-row" data-age="3-6">
+                        <div class="age-label">
+                            <span class="age-range">3-6岁</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-count" id="age36Count" min="0" value="12">
+                            <span class="input-unit">人</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-percent" id="age36Percent" min="0" max="100" step="0.1" value="14">
+                            <span class="input-unit">%</span>
+                        </div>
+                        <div class="age-bar">
+                            <div class="age-bar-fill" style="width: 14%;"></div>
+                        </div>
+                    </div>
+                    <div class="age-row" data-age="7-14">
+                        <div class="age-label">
+                            <span class="age-range">7-14岁</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-count" id="age714Count" min="0" value="65">
+                            <span class="input-unit">人</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-percent" id="age714Percent" min="0" max="100" step="0.1" value="76">
+                            <span class="input-unit">%</span>
+                        </div>
+                        <div class="age-bar">
+                            <div class="age-bar-fill" style="width: 76%;"></div>
+                        </div>
+                    </div>
+                    <div class="age-row" data-age="15+">
+                        <div class="age-label">
+                            <span class="age-range">15岁以上</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-count" id="age15Count" min="0" value="10">
+                            <span class="input-unit">人</span>
+                        </div>
+                        <div class="age-input-group">
+                            <input type="number" class="form-input age-percent" id="age15Percent" min="0" max="100" step="0.1" value="10">
+                            <span class="input-unit">%</span>
+                        </div>
+                        <div class="age-bar">
+                            <div class="age-bar-fill" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <div class="age-total">
+                        <span class="total-label">总计</span>
+                        <span class="total-count" id="totalStudents">87</span>
+                        <span class="total-unit">人</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2027,7 +2192,7 @@
                 interactiveProjects: '互动体验项目',
                 prizes: '奖品设置',
                 promoProjects: '推广项目',
-                ageGroups: '覆盖年龄层',
+                ageGroups: '学生年龄结构',
                 staffArrangement: '人员安排',
                 materials: '物料管理',
                 budget: '活动预算',
@@ -2281,6 +2446,81 @@
             updateLanguageUI();
         }
 
+        // Age Structure Calculator
+        function initAgeStructure() {
+            const inputs = document.querySelectorAll('.age-row');
+            inputs.forEach(row => {
+                const countInput = row.querySelector('.age-count');
+                const percentInput = row.querySelector('.age-percent');
+                const barFill = row.querySelector('.age-bar-fill');
+                
+                countInput.addEventListener('input', () => {
+                    calculateFromCount(row);
+                    saveData();
+                });
+                
+                percentInput.addEventListener('input', () => {
+                    calculateFromPercent(row);
+                    saveData();
+                });
+            });
+            updateTotal();
+        }
+
+        function calculateFromCount(row) {
+            const countInput = row.querySelector('.age-count');
+            const percentInput = row.querySelector('.age-percent');
+            const barFill = row.querySelector('.age-bar-fill');
+            const count = parseInt(countInput.value) || 0;
+            const total = getTotalCount();
+            const percent = total > 0 ? (count / total * 100) : 0;
+            
+            percentInput.value = percent.toFixed(1);
+            barFill.style.width = percent + '%';
+            updateTotal();
+        }
+
+        function calculateFromPercent(row) {
+            const countInput = row.querySelector('.age-count');
+            const percentInput = row.querySelector('.age-percent');
+            const barFill = row.querySelector('.age-bar-fill');
+            const percent = parseFloat(percentInput.value) || 0;
+            
+            barFill.style.width = percent + '%';
+            updateTotal();
+        }
+
+        function getTotalCount() {
+            const c1 = parseInt(document.getElementById('age36Count').value) || 0;
+            const c2 = parseInt(document.getElementById('age714Count').value) || 0;
+            const c3 = parseInt(document.getElementById('age15Count').value) || 0;
+            return c1 + c2 + c3;
+        }
+
+        function updateTotal() {
+            const total = getTotalCount();
+            document.getElementById('totalStudents').textContent = total;
+            
+            // Recalculate percentages based on new total
+            const c1 = parseInt(document.getElementById('age36Count').value) || 0;
+            const c2 = parseInt(document.getElementById('age714Count').value) || 0;
+            const c3 = parseInt(document.getElementById('age15Count').value) || 0;
+            
+            if (total > 0) {
+                const p1 = (c1 / total * 100).toFixed(1);
+                const p2 = (c2 / total * 100).toFixed(1);
+                const p3 = (c3 / total * 100).toFixed(1);
+                
+                document.getElementById('age36Percent').value = p1;
+                document.getElementById('age714Percent').value = p2;
+                document.getElementById('age15Percent').value = p3;
+                
+                document.querySelector('[data-age="3-6"] .age-bar-fill').style.width = p1 + '%';
+                document.querySelector('[data-age="7-14"] .age-bar-fill').style.width = p2 + '%';
+                document.querySelector('[data-age="15+"] .age-bar-fill').style.width = p3 + '%';
+            }
+        }
+
         function updateLanguageUI() {
             // Update toggle button
             const toggleBtn = document.getElementById('langToggle');
@@ -2497,6 +2737,7 @@
             }
             
             renderAll();
+            initAgeStructure();
             updateQuickStats();
         });
 
@@ -2851,7 +3092,7 @@
                     <td>${categoryLabels[b.category] || b.category}</td>
                     <td class="amount">$${b.amount.toLocaleString()}</td>
                     <td><input type="number" class="form-input" style="width: 100px; padding: 0.5rem;" value="${b.spent || 0}" onchange="updateBudgetSpent(${i}, this.value)"></td>
-                    <td>${b.note || '-'}</td>
+                    <td><input type="text" class="form-input" style="width: 150px; padding: 0.5rem; font-size: 0.85rem;" value="${b.note || ''}" placeholder="添加备注..." onchange="updateBudgetNote(${i}, this.value)"></td>
                     <td><button class="btn btn-secondary btn-sm" onclick="deleteBudget(${i})"><i class="fas fa-trash"></i></button></td>
                 </tr>
             `).join('');
@@ -2861,6 +3102,11 @@
         function updateBudgetSpent(index, value) {
             appData.budget[index].spent = parseFloat(value) || 0;
             updateTotalBudget();
+            saveData();
+        }
+
+        function updateBudgetNote(index, value) {
+            appData.budget[index].note = value;
             saveData();
         }
 
@@ -3544,6 +3790,7 @@
                                 <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">${isEN ? 'Category' : '类别'}</th>
                                 <th style="padding: 10px; border: 1px solid #ddd; text-align: right;">${isEN ? 'Amount' : '预算'}</th>
                                 <th style="padding: 10px; border: 1px solid #ddd; text-align: right;">${isEN ? 'Spent' : '实际'}</th>
+                                <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">${isEN ? 'Note' : '备注'}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -3562,12 +3809,14 @@
                                     <td style="padding: 10px; border: 1px solid #ddd;">${categoryLabels[b.category] || b.category}</td>
                                     <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">$${(b.amount || 0).toLocaleString()}</td>
                                     <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">$${(b.spent || 0).toLocaleString()}</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd; font-size: 12px; color: #666;">${b.note || '-'}</td>
                                 </tr>
                             `}).join('')}
                             <tr style="background: #fff9e6; font-weight: bold;">
                                 <td style="padding: 10px; border: 1px solid #ddd;">${isEN ? 'Total' : '总计'}</td>
                                 <td style="padding: 10px; border: 1px solid #ddd; text-align: right; color: #d4a853;">$${appData.budget.reduce((s, b) => s + (b.amount || 0), 0).toLocaleString()}</td>
                                 <td style="padding: 10px; border: 1px solid #ddd; text-align: right; color: #d4a853;">$${appData.budget.reduce((s, b) => s + (b.spent || 0), 0).toLocaleString()}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;"></td>
                             </tr>
                         </tbody>
                     </table>
